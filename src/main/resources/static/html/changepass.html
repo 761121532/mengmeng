@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>修改密码</title>
+    <!-- 引入elements样式 -->
+    <link rel="stylesheet" href="../lib/elementui/css/elementui.css">
+    <!-- 引入重置样式 -->
+    <link rel="stylesheet" href="../style/reset.css">
+    <!-- 引入首页自定义样式 -->
+    <link rel="stylesheet" href="../style/index.css">
+</head>
+
+<body>
+    <div id="box">
+        <el-main>
+            <el-container>
+                <!-- 右边头部 -->
+                <el-header>
+                    <h1>欢迎您,admin</h1>
+                    <p>添加管理员账号</p>
+                </el-header>
+                <!-- 右边主体 -->
+                <el-main>
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>修改密码</span>
+                            <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
+                        </div>
+                        <div class="text item">
+                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px"
+                                class="demo-ruleForm">
+                                <el-form-item label="原密码：" prop="password">
+                                    <el-input type="passwordd" v-model="ruleForm.password"></el-input>
+                                </el-form-item>
+                                <el-form-item label="新密码：" prop="newpass">
+                                    <el-input type="passwordd" v-model="ruleForm.newpass"></el-input>
+                                </el-form-item>
+                                <el-form-item label="确认密码：" prop="newPass">
+                                    <el-input type="passwordd" v-model="ruleForm.newPass"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="submitForm('ruleForm')">修改</el-button>
+                                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                                </el-form-item>
+                            </el-form>
+                        </div>
+                    </el-card>
+                </el-main>
+                <el-footer>
+                    <p>
+                        &copy; copyright 2019 在下萝莉控博客后台管理系统
+                    </p>
+                </el-footer>
+            </el-container>
+        </el-main>
+    </div>
+    <!-- 引入vue -->
+    <script src="../lib/vue/vue.min.js"></script>
+    <!-- 引入jquery -->
+    <script src="../lib/jquery/jquery.min.js"></script>
+    <!-- 引入element -->
+    <script src="../lib/elementui/js/elementui.min.js"></script>
+
+    <!-- <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script> -->
+    <script>
+        new Vue({
+            el: "#box",
+            data() {
+                var validatePass2 = (rule, value, callback) => {
+                    if (value === '') {
+                        callback(new Error('请再次输入新密码'));
+                    } else if (value !== this.ruleForm.newpass) {
+                        callback(new Error('两次输入密码不一致!'));
+                    } else {
+                        callback();
+                    }
+                }
+                return {
+                    // passwordd:"",
+                    ruleForm: {
+                        password: '',
+                        newpass: '',
+                        newPass: ''
+                    },
+                    rules: {
+                        password: [{
+                                required: true,
+                                message: '请输入原密码',
+                                trigger: 'blur'
+                            },
+                            {
+                                min: 4,
+                                max: 16,
+                                message: '密码长度在 4 到 16 个字符',
+                                trigger: 'blur'
+                            }
+                        ],
+                        newpass: [{
+                                required: true,
+                                message: '请输入新密码',
+                                trigger: 'blur'
+                            },
+                            {
+                                min: 4,
+                                max: 16,
+                                message: '密码长度在 4 到 16 个字符',
+                                trigger: 'blur'
+                            }
+                        ],
+                        newPass: {
+                            validator: validatePass2,
+                            trigger: 'blur'
+                        }
+                    }
+                }
+            },
+            methods: {
+                handleOpen(key, keyPath) {
+                    // console.log(key, keyPath);
+                },
+                handleClose(key, keyPath) {
+                    // console.log(key, keyPath);
+                },
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            
+                            // console.log(111);
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields();
+                }
+            }
+        })
+    </script>
+
+</body>
+
+
+
+</html>

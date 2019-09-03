@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.web.DAO.ArticleMapper">
+
+    <select id="find" parameterType="com.example.web.Entity.ArticleEntity" resultType="com.example.web.Entity.ArticleEntity">
+        SELECT * from article where id=#{id}
+    </select>
+
+    <select id="findProportion" parameterType="com.example.web.Entity.ArticleEntity" resultType="com.example.web.Entity.ArticleEntity">
+        SELECT proportion,id from article
+    </select>
+
+    <insert id="addArticle" parameterType="com.example.web.Entity.ArticleEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO article (titly,author, groupID ,briefIntroduction,picture,text) VALUE (#{titly},#{author},#{groupID},#{briefIntroduction},#{picture},#{text})
+    </insert>
+
+    <delete id="deleteArticle" parameterType="com.example.web.Entity.ArticleEntity">
+        DELETE  FROM article WHERE id=#{id}
+    </delete>
+    
+    <select id="image" resultType="com.example.web.Entity.ArticleEntity" parameterType="com.example.web.Entity.Pagination">
+        select id,titly,picture
+        from article
+        limit #{action},#{end}
+    </select>
+
+</mapper>

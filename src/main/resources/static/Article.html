@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>在下萝莉控个人博客源码分享</title>
+    <meta name="keywords" content="个人博客"/>
+    <meta name="description" content="仅仅只是试试而已，有什么不对的地方大家指点一下"/>
+    <link rel="stylesheet" href="css/01.css" />
+    <link rel="stylesheet" href="css/02.css" />
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/ltie9.js"></script>
+</head>
+<body>
+<script>
+        var url=window.location.search.substring(4);
+        $.ajax({
+            url: "article",
+            type: "get",
+            data:{"id":url},
+            success: function (data) {
+                if (data.id===1)var top=1;
+                else var  top=data.id-1;
+                lower=data.id+1;
+                var date = new Date(data['create_time']);
+                var dateString = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
+                $(".art-leftl").append("<div class=\"curr-pos\"> 当前位置：<a href=\"index.html/\">主页</a><a href=\"#\">日志</a> > <a href=\"#\">个人日记</a> > 文章 </div>\n" +
+                    "<h1>"+data.titly+"</h1>\n" +
+                    "<div class=\"txt-infr\">\n" +
+                    "<em class=\"font\">发布时间："+dateString+"</em> \n" +
+                    "<em class=\"font\">作者："+data.author+"</em> <span>个人博客模板</span> <em class=\"font\">浏览次数：</em>\n" +
+                    "<span class=\"count\">"+data.proportion+"</span> </div>\n" +
+                    "<div class=\"graf-box\">\n" +
+                    "<P align=center><STRONG>"+data.briefIntroduction+"</STRONG></P>\n" +
+                    "<P align=center>"+data.text+"</P>\n" +
+                    "</div>" +
+                    "<div class=\"pre-next\">\n" +
+                    "<p>上一篇：<a href=\"Article.html?id="+top+"\">(转载)追忆过往青春</a> </p>\n" +
+                    "<p>下一篇：<a href=\"Article.html?id="+lower+"\">(转载)时光悠悠 岁月无言</a> </p>\n" +
+                    "</div>")
+            }
+        })
+</script>
+<!-- 头部开始 -->
+<header>
+    <div class="header-box"> <a class="logo" href="#"> <img src="image/logo.png" alt="终于等到你" /> </a> <span class="warning"> <img src="image/pic.png" alt="还好我没放弃" /> </span> </div>
+</header>
+<!-- end -->
+<!-- 导航 -->
+<nav class="nav">
+    <ul>
+        <li><a href="index.html">主页</a></li>
+        <li class="current"><a href="#">日志</a></li>
+        <li><a href="#">相册</a></li>
+        <li><a href="#">心情说说</a></li>
+        <li><a href="#">模板分享</a></li>
+        <li><a href="#">个人档</a></li>
+        <li><a href="#">留言板</a></li>
+    </ul>
+</nav>
+<!-- end -->
+<!-- 内容开始 -->
+<section>
+    <!-- 文章 -->
+    <article>
+        <div class="art-left detail-txt">
+            <div class="art-leftl"></div>
+
+            <div class="blank15"></div>
+            <div class="pre-next">
+                <p>本站文章均为原创，欢迎转载，转载请以链接形式注明出处</p>
+                <p class="arcurl">本文地址：<a href="http://www.lmlblog.com/blog/11/1.html"></a></p>
+            </div>
+            <!-- Duoshuo Comment BEGIN -->
+            <div class="ds-thread"  data-thread-key="210" data-author-key="1"  data-url="http://www.lmlblog.com/blog/11/1.html" data-title="爱情过了年纪 不代表你要放弃"></div>
+
+            <!-- Duoshuo Comment END -->
+            <div id="ds-ssr" class="mt1">
+                <dl class="tbox">
+                    <dt> <strong>评论列表（网友评论仅供网友表达个人看法，并不表明本站同意其观点或证实其描述）</strong> </dt>
+                    <dd>
+                        <div class="dede_comment">
+                            <div class="decmt-box1">
+                                <ul>
+                                    <li id="commetcontentNew"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <aside class="right-box">
+            <form name="formsearch" action="/plus/search.php" target="_blank">
+                <div class="search-box">
+                    <input type="hidden" name="kwtype" value="0" />
+                    <input name="q" type="text" id="search-keyword"  placeholder="请输入搜索内容">
+                    <button type="submit" class="search-btn">搜索</button>
+                </div>
+            </form>
+            <div class="art mt20">
+                <h2 class="art-txt no-line"> <em class="iconfont c-f26868"></em> <span>栏目导航</span> </h2>
+                <ul class="column">
+                    <li><a href="#">WEB前端</a></li>
+                    <li><a href="#">编程语言</a></li>
+                    <li><a href="#">个人网站</a></li>
+                    <li><a href="#">90后博客</a></li>
+                    <li><a href="#">操作系统</a></li>
+                    <li><a href="#">QQ空间</a></li>
+                </ul>
+            </div>
+            <div class="art mt20">
+                <h2 class="art-txt"><em class="iconfont c-f26868"></em> <span>最新文章</span> </h2>
+                <ul class="art-list">
+                    <li><a href="#"><em class="iconfont c-f26868"> &#xe60f; </em><span>最动人的唯美爱情语录短句</span></a></li>
+                    <li><a href="#"><em class="iconfont c-f26868"> &#xe60f; </em><span>100条唯美爱情语录短句</span></a> </li>
+                    <li><a href="#"><em class="iconfont c-f26868"> &#xe60f; </em><span>经典爱情语录,唯美爱情语录,一句话爱情语录短句大全</span></a></li>
+                    <li><a href="#"><em class="iconfont c-f26868"> &#xe60f; </em><span>2016爱情经典语录</span></a></li>
+                    <li><a href="#"><em class="iconfont c-f26868"> &#xe60f; </em><span>一句话的简单心情说说</span></a></li>
+                    <li><a href="#"><em class="iconfont c-f26868"> &#xe60f; </em><span>2016张小娴经典爱情语录</span></a></li>
+                    <li><a href="#"><em class="iconfont c-f26868"> &#xe60f; </em><span>经典爱情语录|浪漫爱情语录</span></a> </li>
+                    <li><a href="#"><em class="iconfont c-f26868"> &#xe60f; </em><span>经典爱情语录大全2016最新版</span></a></li>
+                </ul>
+            </div>
+            <div class="art mt20">
+                <h2 class="art-txt"> <em class="iconfont c-f26868"></em><span>热门文章</span></h2>
+                <ul class="art-list">
+                    <li><a href="#" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>奇妙的时光之旅</span> </a> </li>
+                    <li><a href="#" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>我很想打扰你 可是没有话题也没有勇气</span></a></li>
+                    <li><a href="#" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>可以没有爱情，但是绝对不能没有朋友</span></a></li>
+                    <li><a href="#" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>曾经拥有过便是幸福</span> </a> </li>
+                    <li><a href="#" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>给回忆永不褪去的色彩</span> </a> </li>
+                    <li><a href="#" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>遇见喜欢的人已经很难了</span> </a> </li>
+                    <li><a href="#" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>我爱过一个人 背着满身的伤痕</span> </a> </li>
+                    <li><a href="#" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>跌跌撞撞这一条爱情路，我们看到的只有荒芜。</span> </a> </li>
+                    <li><a href="http://www.lmlblog.com/blog/mei/" target="_blank"><em class="iconfont c-f26868"> &#xe60f; </em><span>花开若相惜,花落莫相离。</span> </a> </li>
+                </ul>
+            </div>
+            <div class="art mt20">
+                <h2 class="art-txt"> <em class="iconfont c-f26868"></em> <span>热门标签</span> </h2>
+                <div class="of-h"><a class="btn label" href="#">微信公众号</a><a class="btn label" href="#">爱读书</a> <a class="btn label" href="#">QQ空间模板</a> <a class="btn label" href="#">个人空间</a> <a class="btn label" href="#">个人网站</a> <a class="btn label" href="#">空间主页</a></div>
+                <div class="share mt20">
+                    <div class="bdsharebuttonbox" data-tag="share_1"> <a class="bds_baidu" data-cmd="baidu"></a> <a class="bds_more" data-cmd="more"></a> <a class="bds_tqq" data-cmd="tqq"></a> <a class="bds_qzone" data-cmd="qzone"></a> <a class="bds_tsina" data-cmd="tsina"></a> <a class="bds_renren" data-cmd="renren"></a> <a class="bds_weixin" data-cmd="weixin"></a> </div>
+                    <script type="text/javascript">
+                        window._bd_share_config = {
+                            common : {
+                                bdPic : ''
+                            },
+                            share : [{
+                                "bdSize" : 32
+                            }],
+                            slide : [{
+                                bdImg : 1,
+                                bdPos : "right",
+                                bdTop : 100
+                            }],
+                            selectShare : [{
+                                "bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+                            }]
+                        };
+                        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+                    </script>
+                </div>
+            </div>
+            <div class="art mt20">
+                <h2 class="art-txt"> <em class="iconfont c-f26868"></em> <span>关注我</span> </h2>
+                <div class="two-code"> <img src="images/weixin.png" alt="扫一扫二维码，交个朋友！">
+                    <p class="sao-txt">扫一扫二维码，交个朋友！</p>
+                </div>
+            </div>
+        </aside>
+    </article>
+</section>
+<footer>Design By
+    在下萝莉控<a href="http://www.lmlblog.com" target="_blank">个人博客</a>模板 -  &nbsp;模板下载地址：更新中...<p>
+        本网页为动态页面，由spring boot 搭建后台，集成mybatis，redis依赖，数据库为mysql，前后端分离式开发</p><a href="login.html">后台入口</a></footer>
+</body>
+</html>

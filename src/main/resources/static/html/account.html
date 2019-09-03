@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加用户</title>
+    <!-- 引入elementui.css -->
+    <link rel="stylesheet" href="../css/elementui/css/elementui.css">
+    <!-- 引入重置样式 -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <!-- 引入自定义样式index.css -->
+    <link rel="stylesheet" href="../css/index.css">
+
+</head>
+
+<body>
+    <div id="box">
+        <el-main>
+            <el-container>
+                <!-- 右边头部 -->
+                <el-header>
+                    <h1>欢迎您,admin</h1>
+                    <p>查看所有管理员账号</p>
+                </el-header>
+                <!-- 右边主体 -->
+                <el-main>
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>添加管理员账号</span>
+                            <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
+                        </div>
+                        <div class="text item">
+                            <el-row>
+                                <el-col :span="24">
+                                    <div class="grid-content bg-purple-dark">
+                                        <el-table :data="tableData" style="width: 100%">
+                                            <el-table-column label="用户名称">
+                                                <template slot-scope="scope">
+                                                    <span>{{ scope.row.username }}</span>
+                                                </template>
+                                            </el-table-column>
+                                            <el-table-column label="用户组">
+                                                <template slot-scope="scope">
+                                                    <span>{{ scope.row.usergroup }}</span>
+                                                </template>
+                                            </el-table-column>
+                                            <el-table-column label="真实姓名">
+                                                <template slot-scope="scope">
+                                                    <span>{{ scope.row.realname }}</span>
+                                                </template>
+                                            </el-table-column>
+                                            <el-table-column label="创建时间">
+                                                <template slot-scope="scope">
+                                                    <span>{{ scope.row.ctime|fcTime }}</span>
+                                                </template>
+                                            </el-table-column>
+                                            <el-table-column label="操作">
+                                                <template slot-scope="scope">
+                                                    <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">
+                                                        编辑
+                                                    </el-button>
+                                                    <el-button size="mini" type="danger"
+                                                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                                                </template>
+                                            </el-table-column>
+                                        </el-table>
+                                        <div class="block">
+                                            <el-pagination @size-change="handleSizeChange"
+                                                @current-change="handleCurrentChange" :current-page="currentPage"
+                                                :page-sizes="[5, 10, 15, 20]" :page-size="pageSize"
+                                                layout="sizes, prev, pager, next" :total="totalCount">
+                                            </el-pagination>
+                                        </div>
+                                    </div>
+                                </el-col>
+                            </el-row>
+                        </div>
+                    </el-card>
+                </el-main>
+                <el-footer>
+                    <p>
+                        &copy; copyright 2019 在下萝莉控博客后台系统
+                    </p>
+                </el-footer>
+            </el-container>
+        </el-main>
+    </div>
+    <!-- 引入axios -->
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+    <!-- 引入vue.js -->
+    <script src="../js/vue.js"></script>
+    <!-- jquery.js -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <!-- 引入elementui.min.js -->
+    <script src="../css/elementui/js/elementui.min.js"></script>
+
+    <!-- <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script> -->
+    <script>
+        new Vue({
+            el: "#box",
+            data() {
+                return {
+                    currentPage: 1, // 显示当前页数
+                    pageSize: 5, // 当前页数条数
+                    totalCount: 10, // 总共数据条数
+                    tableData: [],
+                }
+            },
+            methods: {
+                handleEdit(index, row) {
+                    console.log(index, row);
+                },
+                handleDelete(index, row) {
+                    console.log(index, row);
+                },
+                // 请求用户数据的方法
+                getUsers() {
+                    // console.log(this.currentPage, this.pageSize);
+                    // 分页后端需要的参数，currentPage和pageSize
+                    axios.get('/users/userList', {
+                            params: {
+                                currentPage: this.currentPage,
+                                pageSize: this.pageSize
+                            }
+                        })
+                        .then(res => {
+                            // 把数据总条数再赋值给当前的page
+                            this.totalCount = res.data.totalCount;
+                            this.tableData = res.data.pageData;
+                            // console.log(res.data);
+                        }).catch(err => {
+                            console.log(err);
+                        })
+                },
+                handleSizeChange(val) { // 条数发生改变时，重新请求
+                    this.pageSize = val;
+                    this.getUsers();
+                    // console.log(`每页 ${val} 条`);
+                },
+                handleCurrentChange(val) { // 页数改变时重新请求
+                    this.currentPage = val;
+                    this.getUsers()
+                    // console.log(`当前页: ${val}`);
+                }
+            },
+
+            created() {
+                this.getUsers();
+                // this.timers()
+            },
+            // 定义时间格式化的过滤器
+            filters: {
+                fcTime(val) {
+                    return val.replace('T', ' ').replace('.000Z', '')
+                }
+            }
+        })
+
+    </script>
+
+</body>
+
+
+
+</html>

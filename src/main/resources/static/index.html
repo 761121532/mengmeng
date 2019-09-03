@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>在下萝莉控个人博客源码</title>
+    <meta name="keywords" content="个人博客"/>
+    <meta name="description" content="仅仅只是试试而已，有什么不对的地方大家指点一下"/>
+    <link rel="stylesheet" href="css/01.css"/>
+    <link rel="stylesheet" href="css/02.css"/>
+    <script src="iconfont/iconfont.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/ltie9.js"></script>
+    <style>
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<SCRIPT>
+        $.ajax({
+            url: "articles",
+            type: "get",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i]) {
+                        var date = new Date(data[i]['create_time']);
+                        var dateString = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
+                        $(".art-left").append("  <div class='art-model'>\n" +
+                            "<h3 ><a href='Article.html?id="+data[i].id+"'>" + data[i].titly + "</a></h3>\n" +
+                            "<p class='dateview'> <span>创作时间：" + dateString + "</span> <span>   作者：" + data[i].author + "</span> <span>   分类：" + data[i].group + "</span> </p>\n" +
+                            "<dl class='img-txt'>\n" +
+                            "<dt> <a href='http://www.lmlblog.com/blog/11/1.html'><img src=/profile/" + data[i].picture + " alt='终于等到你(电视剧《咱们结婚吧》主题曲) - 张靓颖' title='"+data[i].briefIntroduction+"'></a> </dt>\n" +
+                            "<dd>\n" +
+                            "<p class='deatil'>" + data[i].text + "</p>\n" +
+                            "<a href='Article.html?id="+data[i].id+"' class='btn bg-f26868 c-fff' target='_blank'>查看全文</a> </dd>\n" +
+                            "</dl>\n" +
+                            "</div> ");
+                    }
+                }
+            }
+        });
+</SCRIPT>
+<!-- 头部开始 -->
+<header>
+    <div class="header-box"><a class="logo" href="#"> <img src="image/logo.png" alt="终于等到你"/> </a> <span
+            class="warning"> <img src="image/pic.png" alt="还好我没放弃"/> </span></div>
+</header>
+<!-- end -->
+<!-- 导航 -->
+<nav class="nav">
+    <ul>
+        <li class="current"><a href="#">主页</a></li>
+        <li><a href="markdown/markdown.html" rel="dropmenu2">日志</a></li>
+        <li><a href="相册.html" rel="dropmenu3">相册</a></li>
+        <li><a href="shuo.html" rel="dropmenu4">心情说说</a></li>
+        <li><a href="#" rel="dropmenu5">模板分享</a></li>
+        <li><a href="#">个人档</a></li>
+        <li><a href="#">留言板</a></li>
+    </ul>
+</nav>
+<!-- end -->
+<!-- 内容开始 -->
+<section>
+    <!-- 首页轮播图 -->
+    <div class="banner-box">
+        <div class="banner">
+            <a class="a-img-ban"> <img class="img-ban" src="image/Two dogs/dog1.jpg" alt="二狗子" title="终于等到你还好我没放弃"> </a>
+            <a class="a-img-ban"> <img class="img-ban" src="image/Two dogs/dog4.jpg" alt="花了好几天搞的东西"> </a>
+            <a class="a-img-ban"> <img class="img-ban" src="image/Two dogs/dog3.jpg" alt="怎么样喜欢不"> </a>
+            <a class="a-img-ban"> <img class="img-ban" src="image/Two dogs/dog2.jpg" alt="你看我屌不？"> </a>
+            <ul>
+                <li class="li-img"><img src="image/Two dogs/dog1.jpg" alt="二狗子"/></li>
+                <li class="li-img"><img src="image/Two dogs/dog4.jpg" alt="花了好几天搞的东西"/></li>
+                <li class="li-img"><img src="image/Two dogs/dog3.jpg" alt="怎么样喜欢不"/></li>
+                <li class="li-img"><img src="image/Two dogs/dog2.jpg" alt="你看我屌不？"/></li>
+            </ul>
+        </div>
+        <div class="art">
+            <h2 class="art-txt">
+                <svg class="icon svg-icon" aria-hidden="true">
+                    <use xlink:href="#icon-bookmark"></use>
+                </svg>
+                <span>关于二狗子的事情</span>
+            </h2>
+            <ul class="art-list">
+                <li><a href="#" target="_blank">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-bookmark"></use>
+                    </svg>
+                    <span>奇妙的时光之旅</span> </a></li>
+                <li><a href="#" target="_blank">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-bookmark"></use>
+                    </svg>
+                    <span>没有话题也没有勇气 更没有钱</span></a></li>
+                <li><a href="#" target="_blank">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-bookmark"></use>
+                    </svg>
+                    <span>可以没有爱情，但是绝对不能没有朋友</span></a></li>
+                <li><a href="#" target="_blank">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-bookmark"></use>
+                    </svg>
+                    <span>曾经拥有过便是幸福</span> </a></li>
+                <li><a href="#" target="_blank">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-bookmark"></use>
+                    </svg>
+                    <span>户外的她，像撒欢的野狗</span> </a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 文章 -->
+    <article>
+        <div class="art-left">
+            <h2 class="art-txt">
+                <svg class="icon svg-icon" aria-hidden="true">
+                    <use xlink:href="#icon-edit-tools"></use>
+                </svg>
+                <span>就是一些笔记</span></h2>
+
+        </div>
+        <aside class="right-box">
+            <div class="art">
+                <h2 class="art-txt">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-online-conference"></use>
+                    </svg>
+                    <span>热门户外活动</span></h2>
+                <ul class="art-list">
+                    <li><a href="#">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-bookmark"></use>
+                        </svg>
+                        <span>星空露营</span></a></li>
+                    <li><a href="#">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-bookmark"></use>
+                        </svg>
+                        <span>漂流戏水</span></a></li>
+                    <li><a href="#">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-bookmark"></use>
+                        </svg>
+                        <span>征服雪山</span></a></li>
+                    <li><a href="#">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-bookmark"></use>
+                        </svg>
+                        <span>负重越野</span></a></li>
+                    <li><a href="#">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-bookmark"></use>
+                        </svg>
+                        <span>高强穿越</span></a></li>
+                    <li><a href="#">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-bookmark"></use>
+                        </svg>
+                        <span>花海撒欢</span></a></li>
+                    <li><a href="#">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-bookmark"></use>
+                        </svg>
+                        <span>烧烤野炊</span></a></li>
+                    <li><a href="#">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-bookmark"></use>
+                        </svg>
+                        <span>应季水果</span></a></li>
+                </ul>
+            </div>
+            <div class="toppic">
+                <h2 class="art-txt">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-telegram"></use>
+                    </svg>
+                    <span>图文推荐</span></h2>
+                <ul>
+                    <li><a href="#"><img src="image/Scenery/01.jpg" alt="有一种爱，明明是深爱，却表达不完美。">有一种爱，明明是深爱，却表达不完美。
+                        <p>点击阅读更多...</p>
+                    </a></li>
+                    <li><a href="#"><img src="image/Scenery/02.jpg" alt="遇见你，是我一生的幸运">遇见你，是我一生的幸运
+                        <p>点击阅读更多...</p>
+                    </a></li>
+                    <li><a href="#"><img src="image/Scenery/03.jpg" alt="有些事情本身我们无法控制，只好控制自己。">有些事情本身我们无法控制，只好控制自己。
+                        <p>点击阅读更多...</p>
+                    </a></li>
+                    <li><a href="#"><img src="image/Scenery/04.jpg" alt="爱情如命，生命似水。">爱情如命，生命似水。
+                        <p>点击阅读更多...</p>
+                    </a></li>
+                    <li><a href="#"><img src="image/Scenery/05.jpg" alt="世上所谓幸福，就是一个笨蛋遇到一个傻瓜">世上所谓幸福，就是一个笨蛋遇到一个傻瓜。
+                        <p>点击阅读更多...</p>
+                    </a></li>
+                </ul>
+            </div>
+            <div class="art mt20">
+                <h2 class="art-txt">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-lock"></use>
+                    </svg>
+                    <span>热门标签</span></h2>
+                <div class="of-h"><a class="btn label" href="#">旅行</a> <a class="btn label" href="#">户外</a> <a
+                        class="btn label" href="#">游戏</a> <a class="btn label" href="#">露营</a> <a class="btn label"
+                                                                                                       href="#">星空</a>
+                    <a class="btn label" href="#">草原</a> <a class="btn label" href="#">登山</a> <a class="btn label"
+                                                                                                     href="#">攀岩</a>
+                    <a class="btn label" href="#">电子竞技</a> <a class="btn label" href="#">爱疯爱玩</a> </div>
+            </div>
+            <div class="art mt20">
+                <h2 class="art-txt">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-telegram"></use>
+                    </svg>
+                    <span>关注我</span></h2>
+                <div class="two-code"><img src="image/Scenery/06.jpg" alt="扫一扫，关注我们哦">
+                    <p class="sao-txt">扫一扫二维码，交个朋友！</p>
+                </div>
+            </div>
+            <div class="art mt20">
+                <h2 class="art-txt">
+                    <svg class="icon svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-paper-plane"></use>
+                    </svg>
+                    <span>友情链接</span></h2>
+                <ul class="fri-link">
+                    <li><a href="#">个人网站开发</a></li>
+                    <li><a href="http://www.yudouyudou.com/" target="_blank">余斗博客</a></li>
+                    <li><a href="http://www.lmlblog.com/tag/dedecms" target="_blank">织梦cms</a></li>
+                    <li><a href="http://www.lmlblog.com/category/qianduan" target="_blank" rel="nofollow">web前端</a></li>
+                    <li><a href="http://www.onmpw.com/index.html" target="_blank">迹忆博客</a></li>
+                    <li><a href="http://www.lmlblog.com/time/man.html" target="_blank" rel="nofollow">慢生活</a></li>
+                    <li><a href="http://www.ludou.org/" target="_blank">露兜博客</a></li>
+                    <li><a href="http://www.lmlblog.com/shuo/" target="_blank">唯美说说乐园</a></li>
+                    <li><a href="http://www.lmlblog.com/time/" target="_blank">碎言碎语</a></li>
+                    <li><a href="#">周秋菊个人博客</a></li>
+                    <li><a href="https://www.sogou.com/" target="_blank">搜狗</a></li>
+                </ul>
+            </div>
+        </aside>
+    </article>
+</section>
+<!-- end -->
+<footer>Design By
+    <script> var date = new Date();
+    var dateString = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
+    document.writeln(dateString)
+    </script>
+    在下萝莉控<a href="http://www.lmlblog.com" target="_blank">个人博客</a>模板 -  &nbsp;模板下载地址：更新中...<p>
+        本网页为动态页面，由spring boot 搭建后台，集成mybatis，redis依赖，数据库为mysql，前后端分离式开发</p><a href="login.html">后台入口</a></footer>
+</body>
+</html>

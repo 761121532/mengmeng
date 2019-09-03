@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品管理</title>
+    <!-- 引入elements样式 -->
+    <link rel="stylesheet" href="../lib/elementui/css/elementui.css">
+    <!-- 引入重置样式 -->
+    <link rel="stylesheet" href="../style/reset.css">
+    <!-- 引入首页自定义样式 -->
+    <link rel="stylesheet" href="../style/index.css">
+</head>
+
+<body>
+    <div id="box">
+        <el-main>
+            <el-container>
+                <!-- 右边头部 -->
+                <el-header>
+                    <h1>欢迎您,admin</h1>
+                    <p>商品管理列表</p>
+                </el-header>
+                <!-- 右边主体 -->
+                <el-main>
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>会员管理</span>
+                            <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
+                        </div>
+                        <div class="text item">
+                            <!-- 搜索栏 -->
+                            <el-form ref="form" :model="form" :inline="true">
+                                <el-form-item class="select-goods">
+                                    <el-select v-model="form.classification" placeholder="选择分类">
+                                        <el-option label="食品类" value="ordinary"></el-option>
+                                        <el-option label="水果类" value="silver"></el-option>
+                                        <el-option label="生鲜类" value="gold"></el-option>
+                                        <el-option label="日用品类" value="platinum"></el-option>
+                                        <el-option label="电器类" value="diamond"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item class="search-goods" label="关键字:">
+                                    <el-input v-model="form.goodsName"></el-input>
+                                </el-form-item>
+
+                                <el-form-item>
+                                    <el-button type="primary" @click="onSubmit">查询</el-button>
+                                </el-form-item>
+                            </el-form>
+                            <!-- 分割线 -->
+                            <el-row>
+                                <el-col :span="24">
+                                    <div class="grid-content bg-purple-dark line-divid"></div>
+                                </el-col>
+                            </el-row>
+                            <!-- 商品列表 -->
+                            <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%;"
+                                @selection-change="handleSelectionChange">
+                                <el-table-column type="selection" width="40">
+                                </el-table-column>
+                                <el-table-column prop="barCode" label="商品条形码" width="">
+                                </el-table-column>
+                                <el-table-column prop="productName" label="商品名称" width="">
+                                </el-table-column>
+                                <el-table-column prop="classification" label="所属分类" width="">
+                                </el-table-column>
+                                <el-table-column prop="productPrice" label="售价(元)" width="">
+                                </el-table-column>
+                                <el-table-column prop="purchasePrice" label="促销价(元)" width="">
+                                </el-table-column>
+                                <el-table-column prop="marketPrice" label="市场价(元)" width="">
+                                </el-table-column>
+                                <el-table-column prop="storageCount" label="库存" width="">
+                                </el-table-column>
+                                <el-table-column prop="libraryTotal" label="库存总额(元)" width="">
+                                </el-table-column>
+                                <el-table-column prop="totalSales" label="销售总额(元)" width="">
+                                </el-table-column>
+                            </el-table>
+                            <div style="margin-top: 20px">
+                                <el-button @click="deleteBatch">批量删除选中</el-button>
+                                <el-button @click="toggleSelection()">取消选择</el-button>
+                            </div>
+                            <div class="block">
+                                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                                    :current-page="currentPage" :page-sizes="pagesArr" :page-size="10"
+                                    layout="total, sizes, prev, pager, next, jumper" :prev-text="prevText"
+                                    :next-text="nextText" :total="40">
+                                </el-pagination>
+                            </div>
+
+                        </div>
+                    </el-card>
+                </el-main>
+                <el-footer>
+                    <p>
+                        &copy; copyright 2019 在下萝莉控博客后台管理系统
+                    </p>
+                </el-footer>
+            </el-container>
+        </el-main>
+
+    </div>
+    <!-- 引入vue -->
+    <script src="../lib/vue/vue.min.js"></script>
+    <!-- 引入jquery -->
+    <script src="../lib/jquery/jquery.min.js"></script>
+    <!-- 引入element -->
+    <script src="../lib/elementui/js/elementui.min.js"></script>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data() {
+                return {
+                    prevText: "上一页",
+                    nextText: "下一页",
+                    currentPage: 4,
+                    pagesArr: ["10", "20", "30", "40"],
+                    form: {
+                        classification: '',
+                        goodsName: '',
+                    },
+                    tableData: [{
+                        barCode: 'dfsd233453f', //条形码
+                        productName: '洗发水', //商品名
+                        classification: '日用品类', // 所属分类
+                        productPrice: '88', // 售价
+                        purchasePrice: '66', // 促销价
+                        marketPrice: '99', // 市场价
+                        storageCount: '553', //库存
+                        libraryTotal: '65654',
+                        totalSales: '86436',
+                    }, {
+                        barCode: 'd55665453f', //条形码
+                        productName: '牛板筋', //商品名
+                        classification: '食品类', // 所属分类
+                        productPrice: '12', // 售价
+                        purchasePrice: '9', // 促销价
+                        marketPrice: '13', // 市场价
+                        storageCount: '553', //库存
+                        libraryTotal: '65654',
+                        totalSales: '86436',
+                    }]
+                }
+            },
+            methods: {
+                onSubmit() {
+                    console.log('submit!');
+                },
+                handleEdit(index, row) {
+                    console.log(index, row);
+                },
+                handleDelete(index, row) {
+                    console.log(index, row);
+                },
+                handleSizeChange(val) {
+                    console.log(`每页 ${val} 条`);
+                },
+                handleCurrentChange(val) {
+                    console.log(`当前页: ${val}`);
+                },
+                toggleSelection(rows) {
+                    if (rows) {
+                        rows.forEach(row => {
+                            this.$refs.multipleTable.toggleRowSelection(row);
+                        });
+                    } else {
+                        this.$refs.multipleTable.clearSelection();
+                    }
+                },
+                handleSelectionChange(val) {
+                    this.multipleSelection = val;
+                },
+                deleteBatch() {
+
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

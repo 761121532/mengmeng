@@ -1,0 +1,345 @@
+.el-header, .el-footer {
+  color: #333;
+  text-align: center;
+  text-align: left;
+  padding-top: 15px;
+  line-height: 30px;
+}
+
+
+.el-select {
+  width: 100%;
+}
+
+.el-table__header-wrapper {
+  text-align: center;
+}
+.el-table__header {
+  background-color: red;
+}
+
+
+.el-table thead tr th .cell {
+  text-align: center;
+}
+  
+.el-aside {
+  /* 左侧导航背景图片 */
+  background-image: url('../image/left1.png');
+  color: #333;
+  width: 230px;
+  text-align: center;
+  overflow: hidden;
+  height: 100%;
+}
+
+.el-main {
+  padding: 30px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 让高度撑满屏幕 */
+html, body, #app {
+  height: 100%;
+}
+
+.el-container {
+  height: 100%;
+}
+
+/* 左侧菜单样式 */
+.el-menu {
+  background: transparent;
+}
+
+.el-menu .el-submenu {
+  color: #fff;
+  margin-bottom: 15px;
+  padding-left: 30px;
+}
+
+.el-submenu__title {
+  color: #fff;
+  background-image: url('../image/menu1.png');
+  height: 33px;
+  line-height: 29px;
+  border-radius: 4px 0 0 4px;
+  text-align: left;
+}
+
+.el-menu-item-group__title {
+  height: 0;
+  padding: 0;
+}
+
+.el-menu-item-group .el-menu-item {
+  color: #fff;  
+  text-align: right;
+  height: 30px;
+  line-height: 30px;
+}
+
+.el-menu-item-group .el-menu-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.el-menu-item-group .el-menu-item:hover {
+  background: transparent;
+  font-weight: bold;
+}
+
+/* 左侧导航上部分内容 */
+.left-menu-top-text {
+  text-align: right;
+  padding: 20px 10px 20px 0;
+  color: #ccc;
+
+}
+
+.left-menu-top-text h1 {
+  margin: 20px auto;
+  font-size: 24px;
+  font-weight: bold;
+}
+.left-menu-top-text p {
+    line-height: 18px;
+}
+
+.left-menu-top-text p a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* 右侧头部 */
+.el-header h1{
+  font-size: 24px;
+  font-weight: bold;
+}
+.el-header p{
+  color: #666;
+}
+
+/* 右侧尾部 */
+.el-footer p {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+/* 右侧主体部分 */
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both
+}
+.el-card__header {
+  text-align: left;
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+.el-alert--success {
+  margin-bottom: 30px;
+}
+
+.el-header, .el-footer {
+  color: #333;
+  text-align: center;
+  text-align: left;
+  padding-top: 15px;
+  line-height: 30px;
+}
+
+
+.el-select {
+  width: 100%;
+}
+
+.el-table__header-wrapper {
+  text-align: center;
+}
+.el-table__header {
+  background-color: red;
+}
+
+
+.el-table thead tr th .cell {
+  text-align: center;
+}
+
+.el-aside {
+  /* 左侧导航背景图片 */
+  background-image: url('../image/left1.png');
+  color: #333;
+  width: 230px;
+  text-align: center;
+  overflow: hidden;
+  height: 100%;
+}
+
+.el-main {
+  padding: 30px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 让高度撑满屏幕 */
+html, body, #app {
+  height: 100%;
+}
+
+.el-container {
+  height: 100%;
+}
+
+/* 左侧菜单样式 */
+.el-menu {
+  background: transparent;
+}
+
+.el-menu .el-submenu {
+  color: #fff;
+  margin-bottom: 15px;
+  padding-left: 30px;
+}
+
+.el-submenu__title {
+  color: #fff;
+  background-image: url('../image/menu1.png');
+  height: 33px;
+  line-height: 29px;
+  border-radius: 4px 0 0 4px;
+  text-align: left;
+}
+
+.el-menu-item-group__title {
+  height: 0;
+  padding: 0;
+}
+
+.el-menu-item-group .el-menu-item {
+  color: #fff;
+  text-align: right;
+  height: 30px;
+  line-height: 30px;
+}
+
+.el-menu-item-group .el-menu-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.el-menu-item-group .el-menu-item:hover {
+  background: transparent;
+  font-weight: bold;
+}
+
+/* 左侧导航上部分内容 */
+.left-menu-top-text {
+  text-align: right;
+  padding: 20px 10px 20px 0;
+  color: #ccc;
+
+}
+
+.left-menu-top-text h1 {
+  margin: 20px auto;
+  font-size: 24px;
+  font-weight: bold;
+}
+.left-menu-top-text p {
+  line-height: 18px;
+}
+
+.left-menu-top-text p a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* 右侧头部 */
+.el-header h1{
+  font-size: 24px;
+  font-weight: bold;
+}
+.el-header p{
+  color: #666;
+}
+
+/* 右侧尾部 */
+.el-footer p {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+/* 右侧主体部分 */
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both
+}
+.el-card__header {
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+.el-alert--success {
+  margin-bottom: 30px;
+}
+
+.users .el-form-item .el-form-item__content .el-input .el-input__inner{
+
+  width: 450px;
+}
+.users .el-form-item .el-form-item__content .el-input,
+.users .el-form-item{
+  text-align: left;
+}
+.el-image__inner{
+  margin: 0 auto;
+  text-align: center;
+}
+.el-pagination{
+  display: block;
+}
+.el-pagination__total{
+  margin-left: 10px;
+}
+.pagination{
+  width:20%;
+  margin: 0 auto;
+}
+.titly-demonstration{
+  text-align:center;
+  display: block;
+}
+
+
+

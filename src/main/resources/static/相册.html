@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>在下萝莉控个人博客源码</title>
+    <meta name="keywords" content="个人博客"/>
+    <meta name="description" content="仅仅只是菜鸟试试而已，有什么不对的地方大家指点一下"/>
+    <link rel="stylesheet" href="css/01.css"/>
+    <link rel="stylesheet" href="css/02.css"/>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入自定义样式index.css -->
+    <link rel="stylesheet" href="css/index.css">
+    <!-- 引入vue.js -->
+    <script src="js/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="css/elementui/js/elementui.min.js"></script>
+</head>
+<body>
+
+<!-- 头部开始 -->
+<header>
+    <div class="header-box"><a class="logo" href="#"> <img src="image/logo.png" alt="终于等到你"/> </a> <span
+            class="warning"> <img src="image/pic.png" alt="还好我没放弃"/> </span></div>
+</header>
+<!-- end -->
+<!-- 导航 -->
+<nav class="nav">
+    <ul>
+        <li><a href="index.html">主页</a></li>
+        <li><a href="#" rel="dropmenu2">日志</a></li>
+        <li class="current"><a href="#" rel="dropmenu3">相册</a></li>
+        <li><a href="shuo.html" rel="dropmenu4">心情说说</a></li>
+        <li><a href="#" rel="dropmenu5">模板分享</a></li>
+        <li><a href="#">个人档</a></li>
+        <li><a href="#">留言板</a></li>
+    </ul>
+</nav>
+<!-- end -->
+<!-- 内容开始 -->
+<div id="app">
+    <el-row>
+        <el-col :span="8"  v-for="item in image" :key="item.id" ><div class="grid-content bg-purple">
+            <div class="demo-image__placeholder">
+                <div class="block" style="text-align: center">
+                    <el-image  style="width: 400px; height: 400px" :src="'/profile/'+item.picture"></el-image>
+                    <a class="demonstration titly-demonstration" :href="'Article.html?id='+item.id">{{item.titly}}</a>
+                </div>
+            </div>
+        </div></el-col>
+    </el-row>
+
+    <div class="pagination">
+    <div class="block">
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                @size-change="sizeChange"
+                :page-size="6"
+                :total="sizes">
+        </el-pagination>
+    </div>
+    </div>
+    <!-- end -->
+    <div style="text-align: center">Design By
+        {{dateString}} 在下萝莉控<a href="http://www.lmlblog.com" target="_blank">个人博客</a>模板 -  &nbsp;模板下载地址：更新中...<p>
+            本网页为动态页面，由spring boot 搭建后台，集成mybatis，redis依赖，数据库为mysql，前后端分离式开发 前端页面为vue 加源生开发，视图为element</p><a href="login.html">后台入口</a></div>
+</div>
+
+<script>
+   var vm = new Vue({
+       el: "#app",
+       data:{
+           image:[
+               {src:"image/bjz.jpg",text:"在下萝莉控"},
+               {src:"image/body.png",text:"老夫聊发少年狂"},
+               {src:"image/bjz.jpg",text:"来人喵人缝是也"}
+           ],
+           dateString:"",
+           sizes:10
+       },
+       methods:{
+           ajax1:function () {
+               var that = this;
+               $.ajax({
+                   url:"getimage",
+                   type:"get",
+                   data:{"action":0,"end":6},
+                   dataType:"json",
+                   success:function(data) {
+                       that.image=data.data;
+                       that.sizes=data.state;
+                   },error:function () {
+                       alert("不知道为什么，反正就是报了个错")
+                   }
+               })
+           },
+           date:function () {
+               var date = new Date();
+               this.dateString=date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日"
+           },
+           handleSizeChange(val) {
+               $.ajax({
+                   url:"getimage",
+                   data:{"action":(val-1)*6,"end":val*6},
+                   dataType:"json",
+                   type: "get",
+                   success:function (data) {
+                       this.image=data.data;
+                   },error:function () {
+                       alert("不知道发生了什么，反正就是报了个错")
+                   }
+               })
+           },
+           handleCurrentChange(val) {
+               var that =this;
+              $.ajax({
+                  url:"getimage",
+                  data:{"action":(val-1)*6,"end":val*6},
+                  dataType:"json",
+                  type: "get",
+                  success:function (data) {
+                      that.image=data.data;
+                  },error:function () {
+                      alert("不知道发生了什么，反正就是报了个错")
+                  }
+              })
+           },
+           sizeChange(val){
+                console.log(val)
+           }
+       },
+       created(){
+          this.ajax1();
+          this.date();
+       }
+   })
+</script>
+</body>
+</html>

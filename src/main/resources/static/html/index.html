@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>在下萝莉控博客后台管理系统主页</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入重置样式 -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <!-- 引入自定义样式index.css -->
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<!-- 准备dom -->
+<div id="app">
+    <el-container>
+        <!-- 左边侧栏 -->
+        <el-aside width="230px">
+            <!-- 左侧导航上部分内容 -->
+            <div class="left-menu-top-text">
+                <h1>在下萝莉控博客</h1>
+                <h1>后台管理系统</h1>
+                <p>您好, {{ username }}</p>
+                <p><a href="#" target="mainContent">管理首页</a> | <a href="/users/logout">退出登录</a> </p>
+            </div>
+            <!-- 左侧导航 -->
+            <el-menu default-active="2" :unique-opened="true" class="el-menu-vertical-demo">
+                <!-- 导航一 -->
+                <el-submenu index="2">
+                    <template slot="title">
+                        <span>文章管理</span>
+                    </template>
+                    <el-menu-item-group>
+                        <el-menu-item index="2-1"> <a href="./addArticle.html"  target="mainContent">添加文章</a> </el-menu-item>
+                        <el-menu-item index="2-2"> <a href="./goodsList.html"  target="mainContent">文章列表</a> </el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+                <!-- 导航二 -->
+                <el-submenu index="5">
+                    <template slot="title">
+                        <span>统计管理</span>
+                    </template>
+                    <el-menu-item-group>
+                        <el-menu-item index="5-1">选项1</el-menu-item>
+                        <el-menu-item index="5-2">选项2</el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+                <!-- 导航三 -->
+                <el-submenu index="6">
+                    <template slot="title">
+                        <span>账号管理</span>
+                    </template>
+                    <el-menu-item-group>
+                        <el-menu-item index="6-1"><a href="./userList.html" target="mainContent">账号管理</a></el-menu-item>
+                        <el-menu-item index="6-2"><a href="./userAdd.html" target="mainContent">添加账号</a></el-menu-item>
+                        <el-menu-item index="6-3"><a href="./passwordEdit.html" target="mainContent">密码修改</a></el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+                <!-- 导航四 -->
+                <el-submenu index="7">
+                    <template slot="title">
+                        <span>会员管理</span>
+                    </template>
+                    <el-menu-item-group>
+                        <el-menu-item index="7-1">选项1</el-menu-item>
+                        <el-menu-item index="7-2">选项2</el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+                <!-- 导航五 -->
+                <el-submenu index="8">
+                    <template slot="title">
+                        <span>系统管理</span>
+                    </template>
+                    <el-menu-item-group>
+                        <el-menu-item index="8-1">选项1</el-menu-item>
+                        <el-menu-item index="8-2">选项2</el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+            </el-menu>
+        </el-aside>
+
+        <!-- 右边部分 -->
+        <el-container>
+            <!-- 右边部分 -->
+            <el-container>
+                <!-- 右边头部 -->
+                <el-header>
+                    <h1>欢迎您, {{ username }}</h1>
+                    <p>查看详细的系统信息</p>
+                </el-header>
+
+                <!-- 右边主体 -->
+                <el-main>
+
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>系统信息</span>
+                        </div>
+                        <div class="text item">
+                            <!-- 提示 -->
+                            <el-alert title="成功提示的文案" type="success"></el-alert>
+                            <!-- 内容 -->
+                            <el-row :gutter="20">
+                                <!-- 左侧销售排行 -->
+                                <el-col :span="24">
+                                    <div class="grid-content bg-purple">
+                                        <el-card class="box-card">
+                                            <div slot="header" class="clearfix">
+                                                <span>点击排行</span>
+                                            </div>
+                                            <div class="text item">
+                                                <el-table
+                                                        :data="tableData"
+                                                        style="width: 100%">
+                                                    <el-table-column
+                                                            label="日期">
+                                                        <template slot-scope="scope">
+                                                            <span style="margin-left: 10px">{{ scope.row.titly }}</span>
+                                                        </template>
+                                                    </el-table-column>
+                                                    <el-table-column
+                                                            label="日期"
+                                                            >
+                                                        <template slot-scope="scope">
+                                                            <span style="margin-left: 10px">{{ scope.row.proportion }}</span>
+                                                        </template>
+                                                    </el-table-column>
+
+                                                    <el-table-column
+                                                            label="日期"
+                                                            >
+                                                        <template slot-scope="scope">
+                                                            <span style="margin-left: 10px">{{ scope.row.author }}</span>
+                                                        </template>
+                                                    </el-table-column>
+                                                    <el-table-column
+                                                            label="日期"
+                                                            >
+                                                        <template slot-scope="scope">
+                                                            <span style="margin-left: 10px">{{ scope.row.create_time |times}}</span>
+                                                        </template>
+                                                    </el-table-column>
+                                                    <el-table-column label="操作">
+                                                        <template slot-scope="scope">
+                                                            <el-button
+                                                                    size="mini"
+                                                                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                                                            <el-button
+                                                                    size="mini"
+                                                                    type="danger"
+                                                                    @click="open(scope.row.id)"
+                                                                    >删除</el-button>
+                                                        </template>
+                                                    </el-table-column>
+                                                </el-table>
+                                                <el-pagination
+                                                        @size-change="handleSizeChange"
+                                                        @current-change="handleCurrentChange"
+                                                        :current-page="currentPage"
+                                                        :page-sizes="pageSizes"
+                                                        :page-size="7"
+                                                        layout="total, sizes, prev, pager, next, jumper"
+                                                        :total="sizes">
+                                                </el-pagination>
+                                            </div>
+                                        </el-card>
+                                    </div>
+                                </el-col>
+
+                            </el-row>
+                        </div>
+                    </el-card>
+                </el-main>
+                <!-- 右边尾部 -->
+                <el-footer>
+                    <p>
+                        &copy; copyright 2019 在下萝莉控博客后台管理系统
+                    </p>
+                </el-footer>
+            </el-container>
+        </el-container>
+    </el-container>
+</div>
+<!-- 引入vue.js -->
+<script src="../js/vue.js"></script>
+<!-- jquery.js -->
+<script src="../js/jquery-3.3.1.min.js"></script>
+<!-- 引入elementui.min.js -->
+<script src="../css/elementui/js/elementui.min.js"></script>
+<script>
+    // 创建vue实例
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                id: '',
+                username: '',
+                tableData: [],
+                currentPage: 0,
+                pageSizes:[7],
+                sizes:0
+            }
+        },
+        methods: {
+            getUser: function () {
+                // 保留this
+                var _this = this;
+                $.get('getUserName', function (data) {
+                    _this.username = data;
+                })
+            },
+            getArticle () {
+                $.get('../articles',0, (data) => {
+                    console.log(data);
+                    this.tableData = data;
+                })
+            },
+            getArticleMsg(){
+                var _this=this;
+              $.get("../articleMsg",function (data) {
+                  _this.sizes=data;
+                  console.log(data)
+              })
+            },
+            open(id) {
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.handleDelete(id);
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
+            getid () {
+                var _this = this;
+                this.tableData.id=_this.id
+            },
+            handleEdit(row) {
+                console.log(index, row);
+            },
+            handleDelete(id) {
+                $.get('../delete/articles',{"id": id}, function () {
+                    location.reload();
+                })
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                $.get('../articles',{"page":val-1}, (data) => {
+                    this.tableData = data;
+                });
+
+            }
+        },
+        // 获取用户名
+        created () {
+            this.getArticleMsg();
+            this.getUser();
+            this.getArticle();
+            this.getid();
+        },
+        filters:{
+            times(val) {
+                return val.replace('T',' ').replace('.000+0000','');
+            }
+
+        }
+    })
+</script>
+</body>
+</html>

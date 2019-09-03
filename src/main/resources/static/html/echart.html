@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<link>
+    <meta charset="UTF-8">
+     <title>Title</title>
+    <link rel="stylesheet" href="../css/elementui/css/elementui.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../css/elementui/js/elementui.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <el-row>
+            <el-col :span="8"><div class="grid-content bg-purple">1</div></el-col>
+            <el-col :span="8"><div class="grid-content bg-purple-light">1</div></el-col>
+            <el-col :span="8"><div class="grid-content bg-purple">
+                <div id="firstCanvas" style="width: 600px;height: 600px;border: 1px solid pink"></div>
+            </div></el-col>
+        </el-row>
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data() {
+            return{
+                TableData:[]
+            }
+        },
+        methods:{
+            datal:function () {
+                var _this=this;
+                $.ajax({
+                    url:"../echarts",
+                    type: "get",
+                    success:function (datae) {
+                        _this.TableData=datae;
+                    }
+                });
+            }
+        },
+        created(){
+            this.datal();
+        }
+    })
+</script>
+<script>
+    window.onload=setTimeout(function () {
+        // 基于准备好的dom，初始化echarts实例
+        var data= vm.TableData;
+        data.pop();
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        option = {
+            backgroundColor: '#2c343c',
+
+            title: {
+                text: 'Customized Pie',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series : [
+                {
+                    name:'访问来源',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '50%'],
+                    data:data.sort(function (a, b) { return a.value - b.value; }),
+                    roseType: 'radius',
+                    label: {
+                        normal: {
+                            textStyle: {
+                                color: 'rgba(255, 255, 255, 0.3)'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgba(255, 255, 255, 0.3)'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#C23531',
+                            shadowBlur: 200,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx) {
+                        return Math.random() * 200;
+                    }
+                }
+            ]
+        };;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+
+    },1000);
+
+</script>
+</body>
+</html>

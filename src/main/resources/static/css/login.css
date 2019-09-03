@@ -1,0 +1,62 @@
+.text {
+    font-size: 14px;
+}
+
+.item {
+margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+display: table;
+content: "";
+}
+.clearfix:after {
+clear: both
+}
+
+.box-card {
+width: 480px;
+}
+
+#video {
+    position: fixed;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -999;
+}
+
+/* 背景图片 */
+body {
+    background-image: url('../image/body.png');
+}
+
+/* 水平居中 */
+.el-card {
+    /* 固定定位 */
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 300px;
+}
+
+/* 标题样式 */
+.el-card__header {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 改变字体图标颜色 */
+.el-icon-menu {
+    color: #67C23A;
+}
+
+.el-card__body {
+    padding-left: 0px;
+}

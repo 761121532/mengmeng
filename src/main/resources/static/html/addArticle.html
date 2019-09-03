@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>在下萝莉控个人博客源码分享</title>
+    <meta name="keywords" content="个人博客"/>
+    <meta name="description" content="仅仅只是试试而已，有什么不对的地方大家指点一下"/>
+    <!-- 引入elementui.css -->
+    <link rel="stylesheet" href="../css/elementui/css/elementui.css">
+    <!-- 引入重置样式 -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <!-- 引入自定义样式index.css -->
+    <link rel="stylesheet" href="../css/index.css">
+    <!-- 引入vue.js -->
+    <script src="../js/vue.js"></script>
+    <!-- 引入jquery -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <!-- 引入elementui.min.js -->
+    <script src="../css/elementui/js/elementui.min.js"></script>
+</head>
+<body>
+<!-- 准备dom -->
+<div id="app">
+    <el-container>
+        <!-- 右边部分 -->
+        <el-container>
+            <!-- 右边头部 -->
+            <el-header>
+                <h1>欢迎您, admin</h1>
+                <a href="index.html" style="text-decoration: none">返回主页</a>
+                <p>查看详细的系统信息</p>
+            </el-header>
+            <!-- 右边主体 -->
+            <el-main>
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>添加文章</span>
+                    </div>
+                    <div class="text item">
+                        <!-- 添加账号表单内容 -->
+                        <el-row>
+                            <el-col :span="10">
+                                <div class="grid-content bg-purple">
+                                    <!-- 添加账号表单 -->
+                                    <el-form :model="ruleForm2" status-icon  ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+
+                                        <el-form-item label="所属分类" prop="cateName">
+                                            <el-select v-model="ruleForm2.cateName" placeholder="请选择所属分类">
+                                                <el-option label="表白" value="1"></el-option>
+                                                <el-option label="技术" value="2"></el-option>
+                                                <el-option label="心情" value="3"></el-option>
+                                                <el-option label="分享" value="4"></el-option>
+                                                <el-option label="喜欢" value="5"></el-option>
+                                            </el-select>
+                                        </el-form-item>
+
+                                        <el-form-item label="文章名称" prop="titly">
+                                            <el-input type="text" v-model="ruleForm2.titly" auto-complete="off"></el-input>
+                                        </el-form-item>
+
+                                        <el-form-item label="文章简介" prop="briefIntroduction">
+                                            <el-input type="text" v-model="ruleForm2.briefIntroduction" auto-complete="off"></el-input>
+                                        </el-form-item>
+
+                                        <el-form-item label="图片" prop="picture">
+                                            <el-upload
+                                                    action="/uploadPic"
+                                                    list-type="picture-card"
+                                                    :on-preview="handlePictureCardPreview"
+                                                    :on-remove="handleRemove"
+                                                    accept="image/*" >
+                                                <i class="el-icon-plus"></i>
+                                            </el-upload>
+                                            <el-dialog :visible.sync="dialogVisible">
+                                                <img width="100%" :src="dialogImageUrl" alt="">
+                                            </el-dialog>
+                                        </el-form-item>
+
+                                        <el-form-item label="文章详情" prop="text">
+                                            <el-input v-model.number="ruleForm2.text"></el-input>
+                                        </el-form-item>
+
+                                        <el-form-item>
+                                            <el-button type="success" @click="submitForm('ruleForm2')">添加</el-button>
+                                            <el-button @click="resetForm('ruleForm2')">重置</el-button>
+                                        </el-form-item>
+                                    </el-form>
+                                </div>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </el-card>
+            </el-main>
+            <!-- 右边尾部 -->
+            <el-footer>
+                <p>
+                    &copy; copyright 2019 文章后台管理系统
+                </p>
+            </el-footer>
+        </el-container>
+    </el-container>
+</div>
+<script>
+    // 创建vue实例
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                // 验证数据
+                ruleForm2: {
+                    cateName: '',
+                    titly: '',
+                    briefIntroduction: '',
+                    text: '',
+                },
+                dialogImageUrl: '',
+                dialogVisible: false
+            };
+        },
+        methods: {
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            },
+            // 提交
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if(valid) {
+                        // 收集所有数据
+                        var goodsInfo = {
+                            cateName: this.ruleForm2.cateName,
+                            titly: this.ruleForm2.titly,
+                            briefIntroduction: this.ruleForm2.briefIntroduction,
+                            text: this.ruleForm2.text,
+                        };
+                        if (goodsInfo.cateName==="")alert("你分类还没有填写");
+                        else if (goodsInfo.titly==="")alert("你丫的没写标题啊");
+                        else if (goodsInfo.briefIntroduction==="")alert("大哥，填了简介再走啊");
+                        else if (goodsInfo.text==="")alert("卧槽，你正文都不填的？");
+                        else {
+                            // 发送ajax请求
+                            $.post('/uploadPic', goodsInfo, function (data) {
+                                if (data.errcode === 1) {
+                                    alert(data.msg);
+                                    location.href = "../index.html";
+                                } else {
+                                    alert(data.msg);
+                                }
+                            })
+                        }
+                    } else {
+                        console.log('error submit!!');
+                return false;
+            }
+            });
+            },
+            // 重置
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加会员</title>
+    <!-- 引入elements样式 -->
+    <link rel="stylesheet" href="../lib/elementui/css/elementui.css">
+    <!-- 引入重置样式 -->
+    <link rel="stylesheet" href="../style/reset.css">
+    <!-- 引入首页自定义样式 -->
+    <link rel="stylesheet" href="../style/index.css">
+</head>
+
+<body>
+    <div id="box">
+        <el-main>
+            <el-container>
+                <!-- 右边头部 -->
+                <el-header>
+                    <h1>欢迎您,admin</h1>
+                    <p>添加和编辑会员账号,带<span class="required-text-span">*</span>号为必填</p>
+                </el-header>
+                <!-- 右边主体 -->
+                <el-main>
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>添加会员账号</span>
+                            <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
+                        </div>
+                        <div class="text item">
+                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
+                                <!-- 名字 -->
+                                <el-form-item label="真实姓名" prop="realname">
+                                    <el-input v-model="ruleForm.realname"></el-input>
+                                </el-form-item>
+                                <!-- 会员卡号 -->
+                                <el-form-item label="会员卡号" prop="memNumber">
+                                    <el-input v-model="ruleForm.memNumber"></el-input>
+                                </el-form-item>
+                                <!-- 用户组 -->
+                                <el-form-item label="会员等级" prop="memGrade">
+                                    <el-select v-model="ruleForm.memGrade" placeholder="请选择会员等级">
+                                        <el-option label="普通会员-9.5折" value="普通会员-9.5折"></el-option>
+                                        <el-option label="白银会员-8.5折" value="白银会员-8.5折"></el-option>
+                                        <el-option label="黄金会员-7.5折" value="黄金会员-7.5折"></el-option>
+                                        <el-option label="铂金会员-6.5折" value="铂金会员-6.5折"></el-option>
+                                        <el-option label="钻石会员-5.3折" value="钻石会员-5.3折"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <!-- 身份证号 -->
+                                <el-form-item label="身份证号" prop="idNumber">
+                                    <el-input v-model="ruleForm.idNumber"></el-input>
+                                </el-form-item>
+                                <!-- 用户状态 -->
+                                <el-form-item label="用户状态" prop="userStatus">
+                                    <el-radio-group v-model="ruleForm.userStatus">
+                                        <el-radio label="启用"></el-radio>
+                                        <el-radio label="禁用"></el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                                <!-- 手机号码 -->
+                                <el-form-item label="手机号码" prop="phoneNumber">
+                                    <el-input v-model="ruleForm.phoneNumber"></el-input>
+                                </el-form-item>
+                                <!-- 座机号码 -->
+                                <el-form-item label="座机号码" prop="seatNumber">
+                                    <el-input v-model="ruleForm.seatNumber"></el-input>
+                                </el-form-item>
+                                <!-- 邮箱 -->
+                                <el-form-item label="邮箱" prop="email">
+                                    <el-input v-model="ruleForm.email"></el-input>
+                                </el-form-item>
+                                <!-- 详细地址 -->
+                                <el-form-item label="地址" prop="address">
+                                    <el-input v-model="ruleForm.address"></el-input>
+                                </el-form-item>
+                                <!-- 邮政编码 -->
+                                <el-form-item label="邮政编码" prop="postalCode">
+                                    <el-input v-model="ruleForm.postalCode"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
+                                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                                </el-form-item>
+                            </el-form>
+                        </div>
+                    </el-card>
+                </el-main>
+                <el-footer>
+                    <p>
+                        &copy; copyright 2019 在下萝莉控博客后台管理系统
+                    </p>
+                </el-footer>
+            </el-container>
+        </el-main>
+    </div>
+    <!-- 引入vue -->
+    <script src="../lib/vue/vue.min.js"></script>
+    <!-- 引入axios -->
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+    <!-- 引入element -->
+    <script src="../lib/elementui/js/elementui.min.js"></script>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data() {
+                return {
+                    ruleForm: {
+                        realname: '', // 必填字段
+                        memNumber: '', // 必填字段
+                        memGrade: '', // 必填字段
+                        idNumber: '',
+                        userStatus: '',
+                        phoneNumber: '',
+                        seatNumber: '',
+                        email: '',
+                        address: '',
+                        postalCode: ''
+                    },
+                    rules: {
+                        realname: [{
+                                required: true,
+                                message: '请输入真实名字',
+                                trigger: 'blur'
+                            },
+                            {
+                                min: 2,
+                                max: 20,
+                                message: '长度在 2 到 20 个字符',
+                                trigger: 'blur'
+                            }
+                        ],
+                        memNumber: [{
+                                required: true,
+                                message: '请输入会员卡号',
+                                trigger: 'blur'
+                            },
+                            {
+                                min: 4,
+                                max: 16,
+                                message: '长度在 4 到 16 个字符',
+                                trigger: 'blur'
+                            }
+                        ],
+                        memGrade: [{
+                            required: true,
+                            message: '请选择会员等级',
+                            trigger: 'change'
+                        }]
+                    }
+                };
+            },
+            methods: {
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            axios.post('/member/memAdd', this.ruleForm, {
+                                headers: {
+                                    'Content-Type': 'application/json;charset=UTF-8'
+                                }
+                            }).then(res => {
+                                alert(res.data.msg);
+                                location.href='memberList.html';
+                                console.log(res);
+                            }, err => {
+                                console.log(err);
+                            })
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
